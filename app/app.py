@@ -3,6 +3,10 @@ import pandas as pd
 import time
 import requests
 
+from wordcloud import WordCloud, STOPWORDS
+import matplotlib.pyplot as plt
+
+
 # --- PAGE CONFIG ---
 st.set_page_config(
     page_title="Fake or Nah?",
@@ -144,6 +148,23 @@ if st.session_state.show_results:
     
 st.divider()
 
+
+    # --- WORD CLOUD FOR USER TEXT ---
+st.subheader("Dataset Word Clouds")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.caption("Fake News Word Cloud")
+    st.image("fake_wordcloud.png", use_container_width=True)
+
+with col2:
+    st.caption("True News Word Cloud")
+    st.image("real_wordcloud.png", use_container_width=True)
+
+
+
+
 # --- ABOUT US SECTION ---
 st.header("Meet the Team")
 st.write("Our goal with this project is to create an accessible tool to combat misinformation and promote media literacy.")
@@ -157,21 +178,21 @@ with col2:
 st.write("---")
 col1, col2 = st.columns([1, 2])
 with col1:
-    st.image("https://via.placeholder.com/150", use_container_width=True)
+    st.image("wynne.jpeg", use_container_width=True)
 with col2:
     st.subheader("Wynne")
     st.write("Wynne is the project manager and UI/UX designer, ensuring the app is both powerful and user-friendly.")
 st.write("---")
 col1, col2 = st.columns([1, 2])
 with col1:
-    st.image("https://via.placeholder.com/150", use_container_width=True)
+    st.image("rhode.jpeg", use_container_width=True)
 with col2:
     st.subheader("Rhode")
     st.write("Rhode handles the back-end architecture and data engineering, making sure our models run efficiently.")
 st.write("---")
 col1, col2 = st.columns([1, 2])
 with col1:
-    st.image("https://via.placeholder.com/150", use_container_width=True)
+    st.image("ramneek.jpeg", use_container_width=True)
 with col2:
     st.subheader("Ramneek")
     st.write("Ramneek is responsible for model validation and quality assurance, rigorously testing the detector's accuracy.")
