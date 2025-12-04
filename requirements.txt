@@ -1,0 +1,12 @@
+pandas
+numpy
+matplotlib
+seaborn
+nltk
+better_profanity
+scikit-learn
+xgboost
+jupyterlab
+nbconvert
+ipykernel
+certifi
