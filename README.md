@@ -1,6 +1,6 @@
 # Fake or Nah
 
-The purpose of our project was to create an accurate and efficient fake news detector using Natural Language Processing (NLP). After testing different identfiers that differentiate fake news from true news, we chose to test several different models to train with our data. Among the models that we tested were Logistic Regression, ⁠XGBoost Classifier, Gradient Boosting Classifier, and ⁠Random Forest Classifier. We used a dataset called fake-and-real-news-dataset found on Kaggle for this project. We employed advanced Python techniques and data analysis methodologies, all within AI4ALL's cutting-edge AI4ALL Ignite accelerator.
+The purpose of our project was to create an accurate and efficient fake news detector using Natural Language Processing (NLP). After testing different identfiers that differentiate fake news from true news, we chose to test several different models to train with our data. Among the models that we tested were Logistic Regression and ⁠XGBoost Classifier, although we kept Logistic Regression for our final model. We used a dataset called fake-and-real-news-dataset found on Kaggle for this project. We employed advanced Python techniques and data analysis methodologies, all within AI4ALL's cutting-edge AI4ALL Ignite accelerator.
 
 
 ## Problem Statement <!--- do not change this line -->
