@@ -51,5 +51,5 @@ Our experiments compared classical models (including logistic regression, SVM, a
 - *Wynne Conger ([wc2918@princeton.edu](mailto:wc2918@princeton.edu))*
 - *Ramneek Kaur([rnolas61@asu.edu](mailto:rnolas61@asu.edu))*
 
- ⭐ [Click for more contact information](https://shorturl.at/fGnHA  ⭐ 
+ ⭐ [Further contact information](https://shorturl.at/fGnHA)  ⭐ 
 
