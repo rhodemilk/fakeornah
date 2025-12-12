@@ -10,7 +10,7 @@ Fake news has been a great problem, whether its purpose is to spread propaganda,
 ## Key Results <!--- do not change this line -->
 
 1. Used over 44,000 articles to train a linear regression model with 99% accuracy
-2. Identified 10 identifiers that are supported by the data we are using. 
+2. Identified over 10 features that are supported by the data we are using. 
 
 
 ## Methodologies <!--- do not change this line -->
