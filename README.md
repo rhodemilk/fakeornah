@@ -43,6 +43,9 @@ Our experiments compared classical models (including logistic regression, SVM, a
 - *better_profanity*
 - *scipy*
 
+## Presentations
+- [Final Presentation Slides](https://www.canva.com/design/DAG7O7fJMkc/ptLdMgy1jsbvKJ9kkUy0BQ/view?utm_content=DAG7O7fJMkc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h9d5e3be893)
+- [Project Poster](https://www.canva.com/design/DAG7O7fJMkc/ptLdMgy1jsbvKJ9kkUy0BQ/view?utm_content=DAG7O7fJMkc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h9d5e3be893)
 
 ## Authors <!--- do not change this line -->
 *This project was completed in collaboration with:*
