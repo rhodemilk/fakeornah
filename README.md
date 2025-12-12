@@ -44,7 +44,7 @@ Our experiments compared classical models (including logistic regression, SVM, a
 - *scipy*
 
 ## Presentations
-- [Final Presentation Slides](https://www.canva.com/design/DAG7O7fJMkc/ptLdMgy1jsbvKJ9kkUy0BQ/view?utm_content=DAG7O7fJMkc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h9d5e3be893)
+- [Final Presentation Slides](https://www.canva.com/design/DAG6ac2W_Y8/-JYjvXMdnzNhhJ6Xc6rt-A/view?utm_content=DAG6ac2W_Y8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5d443e8ff8)
 - [Project Poster](https://www.canva.com/design/DAG7O7fJMkc/ptLdMgy1jsbvKJ9kkUy0BQ/view?utm_content=DAG7O7fJMkc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h9d5e3be893)
 
 ## Authors <!--- do not change this line -->
