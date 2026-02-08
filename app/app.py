@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import time
 import requests
+import os
 
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
@@ -107,7 +108,7 @@ if 'analytics_df' not in st.session_state:
     st.session_state.analytics_df = None
 
 # --- FAKE NEWS DETECTOR SECTION ---
-st.image("title_dark.png", use_container_width=True)
+st.title("Fake News Detector")
 st.write("")
 st.write("Try our fake news detector by pasting the title & text of the article you want to check:")
 title = st.text_input("Insert Article Title...")
@@ -156,11 +157,17 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.caption("Fake News Word Cloud")
-    st.image("fake_wordcloud.png", use_container_width=True)
+    try:
+        st.image("app/fake_wordcloud.png", use_container_width=True)
+    except:
+        st.write("Image not available")
 
 with col2:
     st.caption("True News Word Cloud")
-    st.image("real_wordcloud.png", use_container_width=True)
+    try:
+        st.image("app/real_wordcloud.png", use_container_width=True)
+    except:
+        st.write("Image not available")
 
 
 
@@ -171,28 +178,40 @@ st.write("Our goal with this project is to create an accessible tool to combat m
 st.write("")
 col1, col2 = st.columns([1, 2])
 with col1:
-    st.image("Nina_Image.jpg", use_container_width=True)
+    try:
+        st.image("app/Nina_Image.jpg", use_container_width=True)
+    except:
+        st.write("Image not available")
 with col2:
     st.subheader("Nina Elmoyan")
     st.write("Nina is the lead data scientist, specializing in Natural Language Processing and model development.")
 st.write("---")
 col1, col2 = st.columns([1, 2])
 with col1:
-    st.image("wynne.jpeg", use_container_width=True)
+    try:
+        st.image("app/wynne.jpeg", use_container_width=True)
+    except:
+        st.write("Image not available")
 with col2:
     st.subheader("Wynne")
     st.write("Wynne is the project manager and UI/UX designer, ensuring the app is both powerful and user-friendly.")
 st.write("---")
 col1, col2 = st.columns([1, 2])
 with col1:
-    st.image("rhode.jpeg", use_container_width=True)
+    try:
+        st.image("app/rhode.jpeg", use_container_width=True)
+    except:
+        st.write("Image not available")
 with col2:
     st.subheader("Rhode")
     st.write("Rhode handles the back-end architecture and data engineering, making sure our models run efficiently.")
 st.write("---")
 col1, col2 = st.columns([1, 2])
 with col1:
-    st.image("ramneek.jpeg", use_container_width=True)
+    try:
+        st.image("app/ramneek.jpeg", use_container_width=True)
+    except:
+        st.write("Image not available")
 with col2:
     st.subheader("Ramneek")
     st.write("Ramneek is responsible for model validation and quality assurance, rigorously testing the detector's accuracy.")
