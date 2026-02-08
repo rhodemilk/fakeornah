@@ -10,3 +10,5 @@ jupyterlab
 nbconvert
 ipykernel
 certifi
+streamlit
+wordcloud
