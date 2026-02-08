@@ -1,3 +1,5 @@
+
+
 import streamlit as st
 import pandas as pd
 import time
@@ -99,6 +101,18 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 
+# --- LOGO ---
+try:
+    st.image("app/title_dark.png", use_container_width=True)
+except:
+    st.title("Fake or Nah?")
+st.write("")
+
+# --- NAVIGATION ---
+pages = ["Detector", "Compare Models", "Methodology", "Contact"]
+tab1, tab2, tab3, tab4 = st.tabs(pages)
+
+
 # --- SESSION STATE INITIALIZATION ---
 if 'show_results' not in st.session_state:
     st.session_state.show_results = False
@@ -107,111 +121,137 @@ if 'prediction' not in st.session_state:
 if 'analytics_df' not in st.session_state:
     st.session_state.analytics_df = None
 
-# --- FAKE NEWS DETECTOR SECTION ---
-st.title("Fake News Detector")
-st.write("")
-st.write("Try our fake news detector by pasting the title & text of the article you want to check:")
-title = st.text_input("Insert Article Title...")
-article_text = st.text_area("Insert Article Text...", height=200)
+# --- PAGE FUNCTIONS ---
+def detector_page():
+    st.title("Fake News Detector")
+    st.write("")
+    st.write("Try our fake news detector by pasting the title & text of the article you want to check:")
+    title = st.text_input("Insert Article Title...")
+    article_text = st.text_area("Insert Article Text...", height=200)
 
-st.write("") 
-col1, col2, col3 = st.columns([3, 2, 3])
-with col2:
-    if st.button("CHECK", use_container_width=True):
-        if title and article_text:
-            with st.spinner("Analyzing..."):
-                time.sleep(3) # Simulate your model running.
+    st.write("") 
+    col1, col2, col3 = st.columns([3, 2, 3])
+    with col2:
+        if st.button("CHECK", use_container_width=True):
+            if title and article_text:
+                with st.spinner("Analyzing..."):
+                    time.sleep(3) # Simulate your model running.
 
-            import random
-            is_true = random.choice([True, False])
-            st.session_state.show_results = True
-            if is_true:
-                st.session_state.prediction = "Our analysis indicates this text is **most likely TRUE!** 👍"
+                import random
+                is_true = random.choice([True, False])
+                st.session_state.show_results = True
+                if is_true:
+                    st.session_state.prediction = "Our analysis indicates this text is **most likely TRUE!** 👍"
+                else:
+                    st.session_state.prediction = "Our analysis indicates this text is **most likely FAKE!** 👎"
+                st.session_state.analytics_df = pd.DataFrame({
+                    "Metric": ["# of '!?¡' symbols", "# of profanity words", "Sentiment Score"],
+                    "Value": [random.randint(0, 5), random.randint(0, 3), f"{random.uniform(-1, 1):.2f}"]
+                }).set_index("Metric")
             else:
-                st.session_state.prediction = "Our analysis indicates this text is **most likely FAKE!** 👎"
-            st.session_state.analytics_df = pd.DataFrame({
-                "Metric": ["# of '!?¡' symbols", "# of profanity words", "Sentiment Score"],
-                "Value": [random.randint(0, 5), random.randint(0, 3), f"{random.uniform(-1, 1):.2f}"]
-            }).set_index("Metric")
+                st.warning("Please fill in both the title and article text.")
+
+    # --- RESULTS SECTION ---
+    if st.session_state.show_results:
+        st.header("Results")
+        if "TRUE" in st.session_state.prediction:
+            st.success(st.session_state.prediction)
         else:
-            st.warning("Please fill in both the title and article text.")
-
-# --- RESULTS SECTION ---
-if st.session_state.show_results:
-    st.header("Results")
-    if "TRUE" in st.session_state.prediction:
-        st.success(st.session_state.prediction)
-    else:
-        st.error(st.session_state.prediction)
-    st.subheader("Analytics")
-    st.write("Key indicators from our analysis:")
-    st.table(st.session_state.analytics_df)
-    
-st.divider()
-
+            st.error(st.session_state.prediction)
+        st.subheader("Analytics")
+        st.write("Key indicators from our analysis:")
+        st.table(st.session_state.analytics_df)
+        
+    st.divider()
 
     # --- WORD CLOUD FOR USER TEXT ---
-st.subheader("Dataset Word Clouds")
+    st.subheader("Dataset Word Clouds")
 
-col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
 
-with col1:
-    st.caption("Fake News Word Cloud")
-    try:
-        st.image("app/fake_wordcloud.png", use_container_width=True)
-    except:
-        st.write("Image not available")
+    with col1:
+        st.caption("Fake News Word Cloud")
+        try:
+            st.image("app/fake_wordcloud.png", use_container_width=True)
+        except:
+            st.write("Image not available")
 
-with col2:
-    st.caption("True News Word Cloud")
-    try:
-        st.image("app/real_wordcloud.png", use_container_width=True)
-    except:
-        st.write("Image not available")
-
-
+    with col2:
+        st.caption("True News Word Cloud")
+        try:
+            st.image("app/real_wordcloud.png", use_container_width=True)
+        except:
+            st.write("Image not available")
 
 
-# --- ABOUT US SECTION ---
-st.header("Meet the Team")
-st.write("Our goal with this project is to create an accessible tool to combat misinformation and promote media literacy.")
-st.write("")
-col1, col2 = st.columns([1, 2])
-with col1:
-    try:
-        st.image("app/Nina_Image.jpg", use_container_width=True)
-    except:
-        st.write("Image not available")
-with col2:
-    st.subheader("Nina Elmoyan")
-    st.write("Nina is the lead data scientist, specializing in Natural Language Processing and model development.")
-st.write("---")
-col1, col2 = st.columns([1, 2])
-with col1:
-    try:
-        st.image("app/wynne.jpeg", use_container_width=True)
-    except:
-        st.write("Image not available")
-with col2:
-    st.subheader("Wynne")
-    st.write("Wynne is the project manager and UI/UX designer, ensuring the app is both powerful and user-friendly.")
-st.write("---")
-col1, col2 = st.columns([1, 2])
-with col1:
-    try:
-        st.image("app/rhode.jpeg", use_container_width=True)
-    except:
-        st.write("Image not available")
-with col2:
-    st.subheader("Rhode")
-    st.write("Rhode handles the back-end architecture and data engineering, making sure our models run efficiently.")
-st.write("---")
-col1, col2 = st.columns([1, 2])
-with col1:
-    try:
-        st.image("app/ramneek.jpeg", use_container_width=True)
-    except:
-        st.write("Image not available")
-with col2:
-    st.subheader("Ramneek")
-    st.write("Ramneek is responsible for model validation and quality assurance, rigorously testing the detector's accuracy.")
+def compare_models_page():
+    st.title("Compare Models")
+    st.write("Here you can compare different machine learning models used for fake news detection.")
+    # Add content for comparing models, e.g., charts, tables, etc.
+    st.write("Feature coming soon...")
+
+
+def methodology_page():
+    st.title("Methodology")
+    st.write("Learn about the methodology behind our fake news detection system.")
+    st.subheader("Data Processing")
+    st.write("We use natural language processing techniques to analyze text features.")
+    st.subheader("Model Training")
+    st.write("Our models are trained on labeled datasets to classify news articles.")
+    # Add more details as needed
+
+
+def contact_page():
+    st.header("Meet the Team")
+    st.write("Our goal with this project is to create an accessible tool to combat misinformation and promote media literacy.")
+    st.write("")
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        try:
+            st.image("app/Nina_Image.jpg", use_container_width=True)
+        except:
+            st.write("Image not available")
+    with col2:
+        st.subheader("Nina Elmoyan")
+        st.write("Nina is the lead data scientist, specializing in Natural Language Processing and model development.")
+    st.write("---")
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        try:
+            st.image("app/wynne.jpeg", use_container_width=True)
+        except:
+            st.write("Image not available")
+    with col2:
+        st.subheader("Wynne")
+        st.write("Wynne is the project manager and UI/UX designer, ensuring the app is both powerful and user-friendly.")
+    st.write("---")
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        try:
+            st.image("app/rhode.jpeg", use_container_width=True)
+        except:
+            st.write("Image not available")
+    with col2:
+        st.subheader("Rhode")
+        st.write("Rhode handles the back-end architecture and data engineering, making sure our models run efficiently.")
+    st.write("---")
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        try:
+            st.image("app/ramneek.jpeg", use_container_width=True)
+        except:
+            st.write("Image not available")
+    with col2:
+        st.subheader("Ramneek")
+        st.write("Ramneek is responsible for model validation and quality assurance, rigorously testing the detector's accuracy.")
+
+
+# --- MAIN APP LOGIC ---
+with tab1:
+    detector_page()
+with tab2:
+    compare_models_page()
+with tab3:
+    methodology_page()
+with tab4:
+    contact_page()
