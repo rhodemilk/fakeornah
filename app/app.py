@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 st.set_page_config(
     page_title="Fake or Nah?",
     page_icon="📰",
-    layout="centered"
+    layout="centered",
 )
 
 # --- COLOR PALETTE ---
@@ -109,8 +109,8 @@ except:
 st.write("")
 
 # --- NAVIGATION ---
-pages = ["Detector", "Compare Models", "Methodology", "Contact"]
-tab1, tab2, tab3, tab4 = st.tabs(pages)
+pages = ["Detector", "Compare Models", "Contact"]
+tab1, tab2, tab4 = st.tabs(pages)
 
 
 # --- SESSION STATE INITIALIZATION ---
@@ -185,20 +185,73 @@ def detector_page():
 
 
 def compare_models_page():
-    st.title("Compare Models")
-    st.write("Here you can compare different machine learning models used for fake news detection.")
-    # Add content for comparing models, e.g., charts, tables, etc.
-    st.write("Feature coming soon...")
+    st.title("Model Comparison")
+    st.caption("Compare the performance and characteristics of different ML models")
+
+    col1, col2, col3 = st.columns(3, gap="large")
+
+    # --- Logistic Regression ---
+    with col1:
+        st.subheader("Logistic Regression")
+        st.metric("Accuracy", "87%")
+        st.write("Fast and efficient linear model")
+        st.write("**Speed:** Very Fast")
+
+        st.write("**Advantages:**")
+        st.success("Very fast processing")
+        st.success("Low computational cost")
+        st.success("Easy to interpret")
+        st.success("Good baseline performance")
+
+        st.write("**Limitations:**")
+        st.error("Limited complex pattern detection")
+        st.error("Lower accuracy on nuanced cases")
+
+    # --- XGBoost ---
+    with col2:
+        st.subheader("XGBoost")
+        st.metric("Accuracy", "92%")
+        st.write("Advanced gradient boosting model")
+        st.write("**Speed:** Fast")
+
+        st.write("**Advantages:**")
+        st.success("High accuracy")
+        st.success("Handles complex patterns")
+        st.success("Feature importance analysis")
+        st.success("Robust to overfitting")
+
+        st.write("**Limitations:**")
+        st.error("Slower than logistic regression")
+        st.error("More computational resources")
+
+    # --- API Model ---
+    with col3:
+        st.subheader("API Model")
+        st.metric("Accuracy", "95%")
+        st.write("Cloud-based neural network model")
+        st.write("**Speed:** Moderate")
+
+        st.write("**Advantages:**")
+        st.success("Highest accuracy")
+        st.success("Continuously updated")
+        st.success("Deep learning capabilities")
+        st.success("Large training dataset")
+
+        st.write("**Limitations:**")
+        st.error("Requires API key")
+        st.error("Internet dependency")
+        st.error("Usage costs")
+        st.error("Slower response")
 
 
-def methodology_page():
-    st.title("Methodology")
-    st.write("Learn about the methodology behind our fake news detection system.")
-    st.subheader("Data Processing")
-    st.write("We use natural language processing techniques to analyze text features.")
-    st.subheader("Model Training")
-    st.write("Our models are trained on labeled datasets to classify news articles.")
-    # Add more details as needed
+# def methodology_page():
+#     st.title("Methodology")
+#     st.write("Learn about the methodology behind our fake news detection system.")
+#     st.subheader("Data Processing")
+#     st.write("We use natural language processing techniques to analyze text features.")
+#     st.subheader("Model Training")
+#     st.write("Our models are trained on labeled datasets to classify news articles.")
+    
 
 
 def contact_page():
@@ -214,6 +267,7 @@ def contact_page():
     with col2:
         st.subheader("Nina Elmoyan")
         st.write("Nina is the lead data scientist, specializing in Natural Language Processing and model development.")
+        st.link_button("Linkedin", url = "https://www.linkedin.com/in/nina-elmoyan/")
     st.write("---")
     col1, col2 = st.columns([1, 2])
     with col1:
@@ -224,6 +278,7 @@ def contact_page():
     with col2:
         st.subheader("Wynne")
         st.write("Wynne is the project manager and UI/UX designer, ensuring the app is both powerful and user-friendly.")
+        st.link_button("Linkedin", url = "https://www.linkedin.com/in/gwyneth-conger/")
     st.write("---")
     col1, col2 = st.columns([1, 2])
     with col1:
@@ -234,6 +289,7 @@ def contact_page():
     with col2:
         st.subheader("Rhode")
         st.write("Rhode handles the back-end architecture and data engineering, making sure our models run efficiently.")
+        st.link_button("Linkedin", url = "https://www.linkedin.com/in/rhode-sanchez/")
     st.write("---")
     col1, col2 = st.columns([1, 2])
     with col1:
@@ -251,7 +307,7 @@ with tab1:
     detector_page()
 with tab2:
     compare_models_page()
-with tab3:
-    methodology_page()
+# with tab3:
+#     methodology_page()
 with tab4:
     contact_page()
