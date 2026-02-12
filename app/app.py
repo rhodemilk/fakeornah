@@ -268,6 +268,7 @@ def contact_page():
         st.subheader("Nina Elmoyan")
         st.write("Nina is the lead data scientist, specializing in Natural Language Processing and model development.")
         st.link_button("Linkedin", url = "https://www.linkedin.com/in/nina-elmoyan/")
+        st.link_button("Github", url = "https://github.com/elmoyann")
     st.write("---")
     col1, col2 = st.columns([1, 2])
     with col1:
@@ -279,6 +280,7 @@ def contact_page():
         st.subheader("Wynne")
         st.write("Wynne is the project manager and UI/UX designer, ensuring the app is both powerful and user-friendly.")
         st.link_button("Linkedin", url = "https://www.linkedin.com/in/gwyneth-conger/")
+        
     st.write("---")
     col1, col2 = st.columns([1, 2])
     with col1:
@@ -290,6 +292,7 @@ def contact_page():
         st.subheader("Rhode")
         st.write("Rhode handles the back-end architecture and data engineering, making sure our models run efficiently.")
         st.link_button("Linkedin", url = "https://www.linkedin.com/in/rhode-sanchez/")
+        st.link_button("Github", url = "https://github.com/rhodemilk")
     st.write("---")
     col1, col2 = st.columns([1, 2])
     with col1:
@@ -300,7 +303,7 @@ def contact_page():
     with col2:
         st.subheader("Ramneek")
         st.write("Ramneek is responsible for model validation and quality assurance, rigorously testing the detector's accuracy.")
-
+        st.link_button("Linkedin", url = "https://www.linkedin.com/in/ramneek-kaur-704130261/")
 
 # --- MAIN APP LOGIC ---
 with tab1:
