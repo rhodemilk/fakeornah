@@ -1,5 +1,3 @@
-
-
 import streamlit as st
 import pandas as pd
 import time
@@ -33,17 +31,20 @@ NEWSPAPER_BACKGROUND_BASE64 = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAA
 st.markdown(f"""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&display=swap');
-        
-        /* --- VIBE UPGRADE: TEXTURED BACKGROUND (ROBUST METHOD) --- */
+
+        /* ✅ FORCE LIGHT MODE so dark mode can’t break readability */
+        :root {{
+            color-scheme: light;
+        }}
+
         body {{
             background-image: url("{NEWSPAPER_BACKGROUND_BASE64}");
             background-size: cover;
             background-repeat: repeat;
-            background-attachment: fixed; /* Keeps the background still on scroll */
+            background-attachment: fixed;
         }}
-        
-        /* --- VIBE UPGRADE: MAIN CONTENT AS A "PAGE" --- */
-        /* This targets the main container where all your content lives */
+
+        /* Main content "paper" */
         [data-testid="stAppViewContainer"] > .main {{
             background-color: {COLOR_BACKGROUND};
             border: 2px solid #A9A9A9;
@@ -52,18 +53,23 @@ st.markdown(f"""
             margin-top: 2rem;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }}
-        
+
+        /* ✅ Keep fonts, but DON'T force text color globally (this caused dark mode issues) */
         html, body, [class*="st-"] {{
             font-family: 'Merriweather', serif;
+        }}
+
+        /* If you want text color inside your paper only */
+        [data-testid="stAppViewContainer"] > .main,
+        [data-testid="stAppViewContainer"] > .main * {{
             color: {COLOR_PRIMARY_TEXT};
         }}
-        
+
         h1, h2 {{
             font-family: 'Playfair Display', serif;
             font-weight: 700;
         }}
-        
-        /* Custom styling for the spinner animation */
+
         .stSpinner > div > div {{
             border-top-color: {COLOR_BUTTON_HOVER} !important;
             border-right-color: {COLOR_BUTTON_HOVER} !important;
@@ -73,7 +79,7 @@ st.markdown(f"""
             height: 80px !important;
             border-width: 8px !important;
         }}
-        
+
         .stButton>button {{
             border: 2px solid {COLOR_BUTTON_BACKGROUND};
             border-radius: 5px;
@@ -81,21 +87,21 @@ st.markdown(f"""
             font-family: 'Playfair Display', serif;
             font-size: 20px;
             font-weight: 700;
-            color: {COLOR_BUTTON_BACKGROUND};
-            background-color: {COLOR_BUTTON_TEXT};
+            color: {COLOR_BUTTON_BACKGROUND} !important;
+            background-color: {COLOR_BUTTON_TEXT} !important;
             transition: all 0.3s ease-in-out;
         }}
-        
+
         .stButton>button:hover {{
             transform: scale(1.05);
             border-color: {COLOR_BUTTON_HOVER};
-            background-color: {COLOR_BUTTON_HOVER};
-            color: {COLOR_BUTTON_HOVER_TEXT};
+            background-color: {COLOR_BUTTON_HOVER} !important;
+            color: {COLOR_BUTTON_HOVER_TEXT} !important;
         }}
-        
+
         div[data-testid="stImage"] img {{
             border-radius: 10px;
-            border: 3px solid {COLOR_IMAGE_BORDER}; 
+            border: 3px solid {COLOR_IMAGE_BORDER};
         }}
     </style>
 """, unsafe_allow_html=True)
@@ -121,6 +127,7 @@ if 'prediction' not in st.session_state:
 if 'analytics_df' not in st.session_state:
     st.session_state.analytics_df = None
 
+
 # --- PAGE FUNCTIONS ---
 def detector_page():
     st.title("Fake News Detector")
@@ -129,13 +136,13 @@ def detector_page():
     title = st.text_input("Insert Article Title...")
     article_text = st.text_area("Insert Article Text...", height=200)
 
-    st.write("") 
+    st.write("")
     col1, col2, col3 = st.columns([3, 2, 3])
     with col2:
         if st.button("CHECK", use_container_width=True):
             if title and article_text:
                 with st.spinner("Analyzing..."):
-                    time.sleep(3) # Simulate your model running.
+                    time.sleep(3)
 
                 import random
                 is_true = random.choice([True, False])
@@ -151,7 +158,6 @@ def detector_page():
             else:
                 st.warning("Please fill in both the title and article text.")
 
-    # --- RESULTS SECTION ---
     if st.session_state.show_results:
         st.header("Results")
         if "TRUE" in st.session_state.prediction:
@@ -161,21 +167,17 @@ def detector_page():
         st.subheader("Analytics")
         st.write("Key indicators from our analysis:")
         st.table(st.session_state.analytics_df)
-        
+
     st.divider()
 
-    # --- WORD CLOUD FOR USER TEXT ---
     st.subheader("Dataset Word Clouds")
-
     col1, col2 = st.columns(2)
-
     with col1:
         st.caption("Fake News Word Cloud")
         try:
             st.image("app/fake_wordcloud.png", use_container_width=True)
         except:
             st.write("Image not available")
-
     with col2:
         st.caption("True News Word Cloud")
         try:
@@ -190,7 +192,6 @@ def compare_models_page():
 
     col1, col2, col3 = st.columns(3, gap="large")
 
-    # --- Logistic Regression ---
     with col1:
         st.subheader("Logistic Regression")
         st.metric("Accuracy", "87%")
@@ -207,7 +208,6 @@ def compare_models_page():
         st.error("Limited complex pattern detection")
         st.error("Lower accuracy on nuanced cases")
 
-    # --- XGBoost ---
     with col2:
         st.subheader("XGBoost")
         st.metric("Accuracy", "92%")
@@ -224,7 +224,6 @@ def compare_models_page():
         st.error("Slower than logistic regression")
         st.error("More computational resources")
 
-    # --- API Model ---
     with col3:
         st.subheader("API Model")
         st.metric("Accuracy", "95%")
@@ -244,16 +243,6 @@ def compare_models_page():
         st.error("Slower response")
 
 
-# def methodology_page():
-#     st.title("Methodology")
-#     st.write("Learn about the methodology behind our fake news detection system.")
-#     st.subheader("Data Processing")
-#     st.write("We use natural language processing techniques to analyze text features.")
-#     st.subheader("Model Training")
-#     st.write("Our models are trained on labeled datasets to classify news articles.")
-    
-
-
 def contact_page():
     st.header("Meet the Team")
     st.write("Our goal with this project is to create an accessible tool to combat misinformation and promote media literacy.")
@@ -267,8 +256,9 @@ def contact_page():
     with col2:
         st.subheader("Nina Elmoyan")
         st.write("Nina is the lead data scientist, specializing in Natural Language Processing and model development.")
-        st.link_button("Linkedin", url = "https://www.linkedin.com/in/nina-elmoyan/")
-        st.link_button("Github", url = "https://github.com/elmoyann")
+        st.link_button("Linkedin", url="https://www.linkedin.com/in/nina-elmoyan/")
+        st.link_button("Github", url="https://github.com/elmoyann")
+
     st.write("---")
     col1, col2 = st.columns([1, 2])
     with col1:
@@ -279,8 +269,8 @@ def contact_page():
     with col2:
         st.subheader("Wynne")
         st.write("Wynne is the project manager and UI/UX designer, ensuring the app is both powerful and user-friendly.")
-        st.link_button("Linkedin", url = "https://www.linkedin.com/in/gwyneth-conger/")
-        
+        st.link_button("Linkedin", url="https://www.linkedin.com/in/gwyneth-conger/")
+
     st.write("---")
     col1, col2 = st.columns([1, 2])
     with col1:
@@ -291,8 +281,9 @@ def contact_page():
     with col2:
         st.subheader("Rhode")
         st.write("Rhode handles the back-end architecture and data engineering, making sure our models run efficiently.")
-        st.link_button("Linkedin", url = "https://www.linkedin.com/in/rhode-sanchez/")
-        st.link_button("Github", url = "https://github.com/rhodemilk")
+        st.link_button("Linkedin", url="https://www.linkedin.com/in/rhode-sanchez/")
+        st.link_button("Github", url="https://github.com/rhodemilk")
+
     st.write("---")
     col1, col2 = st.columns([1, 2])
     with col1:
@@ -303,14 +294,13 @@ def contact_page():
     with col2:
         st.subheader("Ramneek")
         st.write("Ramneek is responsible for model validation and quality assurance, rigorously testing the detector's accuracy.")
-        st.link_button("Linkedin", url = "https://www.linkedin.com/in/ramneek-kaur-704130261/")
+        st.link_button("Linkedin", url="https://www.linkedin.com/in/ramneek-kaur-704130261/")
+
 
 # --- MAIN APP LOGIC ---
 with tab1:
     detector_page()
 with tab2:
     compare_models_page()
-# with tab3:
-#     methodology_page()
 with tab4:
     contact_page()
